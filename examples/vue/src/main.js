@@ -19,7 +19,7 @@ function render(props = {}) {
   router = new VueRouter({
     base: window.__POWERED_BY_QIANKUN__ ? '/vuesubapp' : '/',
     mode: 'history',
-    redirect: '/vuesubapp/home',
+    // redirect: '/vuesubapp/home',
     // routes: window.__POWERED_BY_QIANKUN__ ? [
     //   {
     //     path: '/vuesubapp',
