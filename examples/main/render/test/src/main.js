@@ -1,21 +1,33 @@
-import 'zone.js'; // for angular subapp
-import { initGlobalState, registerMicroApps, runAfterFirstMounted, setDefaultMountApp, start } from '../../es';
-import './index.less';
+import Vue from 'vue';
+import App from './App.vue';
+import getRouter from './router';
+import store from './store';
+
+Vue.config.productionTip = false;
+
+new Vue({
+  router: getRouter(),
+  store,
+  render: (h) => h(App),
+}).$mount('#app');
+
+// import 'zone.js'; // for angular subapp
+import { initGlobalState, registerMicroApps, runAfterFirstMounted, start } from '../../../../../es';
+// import './index.less';
 /**
  * 主应用 **可以使用任意技术栈**
  * 以下分别是 React 和 Vue 的示例，可切换尝试
  */
 // import render from './render/ReactRender';
-import render from './render/VueRender';
+// import render from './render/VueRender';
 // import render from './render/test/src/main';
-
 
 /**
  * Step1 初始化应用（可选）
  */
-render({ loading: true });
+// render({ loading: true });
 
-const loader = (loading) => render({ loading });
+// const loader = (loading) => render({ loading });
 
 /**
  * Step2 注册子应用
@@ -27,42 +39,42 @@ registerMicroApps(
       name: 'react16',
       entry: '//localhost:7100',
       container: '#subapp-viewport',
-      loader,
+      // loader,
       activeRule: '/react16',
     },
     {
       name: 'react15',
       entry: '//localhost:7102',
       container: '#subapp-viewport',
-      loader,
+      // loader,
       activeRule: '/react15',
     },
     {
       name: 'vue',
       entry: '//localhost:7101',
       container: '#subapp-viewport',
-      loader,
-      activeRule: '/vue',
+      // loader,
+      activeRule: '/vuesubapp',
     },
-    {
-      name: 'angular9',
-      entry: '//localhost:7103',
-      container: '#subapp-viewport',
-      loader,
-      activeRule: '/angular9',
-    },
+    // {
+    //   name: 'angular9',
+    //   entry: '//localhost:7103',
+    //   container: '#subapp-viewport',
+    //   loader,
+    //   activeRule: '/angular9',
+    // },
     {
       name: 'purehtml',
       entry: '//localhost:7104',
       container: '#subapp-viewport',
-      loader,
+      // loader,
       activeRule: '/purehtml',
     },
     {
       name: 'vue3',
       entry: '//localhost:7105',
       container: '#subapp-viewport',
-      loader,
+      // loader,
       activeRule: '/vue3',
     },
   ],
@@ -101,7 +113,7 @@ setGlobalState({
 /**
  * Step3 设置默认进入的子应用
  */
-setDefaultMountApp('/react16');
+// setDefaultMountApp('/vue');
 
 /**
  * Step4 启动应用

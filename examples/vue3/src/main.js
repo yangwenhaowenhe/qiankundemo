@@ -1,6 +1,6 @@
 import './public-path';
 import { createApp } from 'vue';
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import App from './App.vue';
 import routes from './router';
 import store from './store';
@@ -12,7 +12,7 @@ let history = null;
 
 function render(props = {}) {
   const { container } = props;
-  history = createWebHistory(window.__POWERED_BY_QIANKUN__ ? '/vue3' : '/');
+  history = createWebHashHistory(window.__POWERED_BY_QIANKUN__ ? '/vue3' : '/');
   router = createRouter({
     history,
     routes,

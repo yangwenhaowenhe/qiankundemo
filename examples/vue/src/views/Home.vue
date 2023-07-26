@@ -34,6 +34,9 @@
         dialogVisible: false,
       };
     },
+    mounted() {
+      console.log('vue sub app--------------- home')
+    },
     methods: {
       handleClose(done) {
         this.$confirm('Sure to close？')

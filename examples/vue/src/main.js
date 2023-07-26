@@ -4,7 +4,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './App.vue';
-import routes from './router';
+import routes, { routesSingle } from './router';
 import store from './store';
 
 Vue.config.productionTip = false;
@@ -17,10 +17,30 @@ let instance = null;
 function render(props = {}) {
   const { container } = props;
   router = new VueRouter({
-    base: window.__POWERED_BY_QIANKUN__ ? '/vue' : '/',
+    base: window.__POWERED_BY_QIANKUN__ ? '/vuesubapp' : '/',
     mode: 'history',
-    routes,
+    redirect: '/vuesubapp/home',
+    // routes: window.__POWERED_BY_QIANKUN__ ? [
+    //   {
+    //     path: '/vuesubapp',
+    //     children: routes,
+    //     // redirect: '/vuesubapp/home'
+    //   }
+    // ] : routesSingle,
+    routes: window.__POWERED_BY_QIANKUN__ ? routes :routesSingle
   });
+
+  router.beforeEach((to, from, next) => {
+    // if (!to.path.includes('/vuesubapp')) {
+    //   next({
+    //     path: `/vuesubapp${to.path}`,
+    //     query: to.query
+    //   })
+    //   return
+    // }
+    // debugger
+    next()
+  })
 
   instance = new Vue({
     router,
