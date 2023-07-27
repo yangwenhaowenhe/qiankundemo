@@ -28,7 +28,7 @@ const routes = [
 const getRouter = () =>
   new VueRouter({
     routes,
-    mode: 'history',
+    mode: 'hash',
   });
 
 export default getRouter;

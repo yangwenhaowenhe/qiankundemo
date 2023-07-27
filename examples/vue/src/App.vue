@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/home">Home</router-link>
+      <router-link to="/vuesubapp/home">Home</router-link>
       |
-      <router-link to="/about">About</router-link>
+      <router-link to="/vuesubapp/about">About</router-link>
     </div>
     <router-view/>
   </div>
@@ -11,13 +11,13 @@
 <script>
 export default {
   mounted() {
-    console.log('vue sub app---------------')
+    console.log('vue sub app---------------', this.$router.options,this.$route.matched)
   },
-  // watch: {
-  //   '$route.path': function(val, old) {
-  //     debugger
-  //   }
-  // },
+  watch: {
+    '$route.path': function(val, old) {
+      console.log('vue sub app---------------', this.$router.options,this.$route.matched)
+    }
+  },
   // computed: {
   //   base() {}
   // }

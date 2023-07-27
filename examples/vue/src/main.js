@@ -6,6 +6,7 @@ import VueRouter from 'vue-router';
 import App from './App.vue';
 import routes, { routesSingle } from './router';
 import store from './store';
+import Container from './views/container.vue'
 
 Vue.config.productionTip = false;
 
@@ -14,21 +15,33 @@ Vue.use(ElementUI);
 let router = null;
 let instance = null;
 
+const handleSlash = (routesConfig) => {
+  return routesConfig.map((item) => {
+    return {
+      ...item,
+      path: item.path.replace(/^\//, '')
+    }
+  })
+}
+console.log('handleSlash(routesSingle): ', handleSlash(routesSingle))
+
 function render(props = {}) {
   const { container } = props;
   router = new VueRouter({
-    base: window.__POWERED_BY_QIANKUN__ ? '/vuesubapp' : '/',
-    mode: 'history',
+    // base: window.__POWERED_BY_QIANKUN__ ? '/vuesubapp' : '/',
+    mode: 'hash',
     // redirect: '/vuesubapp/home',
-    // routes: window.__POWERED_BY_QIANKUN__ ? [
-    //   {
-    //     path: '/vuesubapp',
-    //     children: routes,
-    //     // redirect: '/vuesubapp/home'
-    //   }
-    // ] : routesSingle,
-    routes: window.__POWERED_BY_QIANKUN__ ? routes :routesSingle
+    routes: window.__POWERED_BY_QIANKUN__ ? [
+      {
+        path: '/vuesubapp',
+        children: handleSlash(routesSingle),
+        component: Container,
+        redirect: '/vuesubapp/home'
+      }
+    ] : routesSingle,
+    // routes: window.__POWERED_BY_QIANKUN__ ? routes : routesSingle
   });
+  
 
   router.beforeEach((to, from, next) => {
     // if (!to.path.includes('/vuesubapp')) {

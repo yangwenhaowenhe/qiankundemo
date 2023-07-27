@@ -54,7 +54,7 @@ registerMicroApps(
       entry: '//localhost:7101',
       container: '#subapp-viewport',
       // loader,
-      activeRule: '/vuesubapp',
+      activeRule: '#/vuesubapp',
     },
     // {
     //   name: 'angular9',
